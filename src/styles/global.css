@@ -16,6 +16,13 @@
   --steel: #49759f;
   --red: #d93a2b;
 
+  /* The same two pigments, mixed darker for the cases where paper text sits on
+     them. The art's red and steel measure 4.05:1 and 4.30:1 against paper,
+     under AA; these measure 4.9:1 and 5.2:1. The illustrations keep the
+     lighter mix, so the page and the panels still read as one palette. */
+  --red-deep: #c62d20;
+  --steel-deep: #3f6890;
+
   /* One weight, everywhere. "Heavier" is drawn as a second inner line on a
      pseudo-element, never as a wider border, which would resize the box. */
   --line: 3px;
@@ -141,7 +148,7 @@ h3 {
 
 /* The board's active state: the steel field, not an underline. */
 .rail__nav a[aria-current="true"] {
-  background: var(--steel);
+  background: var(--steel-deep);
   color: var(--paper);
 }
 
@@ -161,6 +168,9 @@ h3 {
 .tier {
   display: grid;
   gap: var(--gutter);
+  /* The rail is sticky, so a jump from it would otherwise park the tier's
+     heading underneath the rail. Clear the rail plus a gutter. */
+  scroll-margin-top: calc(3.25rem + var(--gutter));
 }
 
 .tier--projects {
@@ -340,7 +350,7 @@ h3 {
 }
 
 .btn--primary {
-  background: var(--red);
+  background: var(--red-deep);
   color: var(--paper);
 }
 
@@ -389,7 +399,7 @@ h3 {
 }
 
 .panel--link:hover .panel__strip {
-  background: var(--steel);
+  background: var(--steel-deep);
   color: var(--paper);
 }
 
@@ -407,8 +417,32 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   Contact
+   Contact: the closing panel
    -------------------------------------------------------------------------- */
+
+/* The tier where the visitor decides is a drawn panel like every other tier,
+   with the actions in its caption strip and the credential restated in
+   narration, six screens after the hero said it. */
+.panel--close .panel__img {
+  /* Shallower than the hero's 21:9: at that crop the standing figure loses his
+     head. This keeps him whole from hair to shoes. */
+  aspect-ratio: 2 / 1;
+  object-position: 50% 20%;
+}
+
+.caption--close {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  max-width: min(20rem, 52%);
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  letter-spacing: 0.06em;
+  padding: 0.6rem 0.8rem;
+}
+
+.panel__strip--close {
+  padding: clamp(1rem, 2.4vw, 1.6rem) clamp(1rem, 3vw, 2rem);
+}
 
 .contact {
   display: flex;
@@ -430,6 +464,10 @@ h3 {
 .foot {
   border-top: var(--line) solid var(--ink);
   background: var(--yellow);
+}
+
+.foot__end {
+  margin-left: auto;
 }
 
 .foot__inner {
@@ -482,6 +520,10 @@ h3 {
     aspect-ratio: 16 / 10;
   }
 
+  .panel--close .panel__img {
+    aspect-ratio: 16 / 9;
+  }
+
   .panel--text .prose {
     columns: 1;
   }
@@ -501,15 +543,35 @@ h3 {
     justify-content: space-between;
   }
 
+  /* Thumb targets, not text: the padding is what makes these tappable. This
+     lands them at 44px, the size a thumb actually needs. */
   .rail__nav a {
-    padding: 0.15rem 0.2rem;
+    padding: 0.72rem 0.35rem;
     font-size: 0.78rem;
     letter-spacing: 0.03em;
   }
 
-  .tier--life,
   .tier--projects {
     grid-template-columns: 1fr;
+  }
+
+  /* The life tier holds two across on a phone. Six full-width panels made the
+     personal half taller than the professional case it is meant to sit under. */
+  .tier--life {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tier--life .panel__strip {
+    padding: 0.45rem 0.55rem;
+  }
+
+  .tier--life .panel__strip h3 {
+    font-size: 0.92rem;
+  }
+
+  /* The stacked rail is taller on a phone, so the jump target clears more. */
+  .tier {
+    scroll-margin-top: calc(6rem + var(--gutter));
   }
 
   /* The panel grows to hold the lede caption; the picture keeps the aspect.
@@ -537,5 +599,25 @@ h3 {
     position: static;
     max-width: none;
     margin: var(--gutter);
+  }
+
+  /* He stands right of centre in the closing art, so a taller crop keeps him
+     and the skyline he is looking at without the caption landing on him. */
+  .panel--close .panel__img {
+    aspect-ratio: 5 / 4;
+    object-position: 62% 60%;
+  }
+
+  .caption--close {
+    max-width: 52%;
+  }
+
+  .contact__lead {
+    flex-basis: 100%;
+  }
+
+  .contact .btn {
+    flex: 1 1 100%;
+    justify-content: center;
   }
 }

@@ -7,6 +7,7 @@ import Rail from "../components/Rail.astro";
 import Icon from "../components/Icon.astro";
 import panels from "../content/panels.json";
 import hero from "../assets/panels/hero.png";
+import close from "../assets/panels/close.png";
 
 import { frontmatter as introData, Content as IntroBody } from "../content/intro.md";
 import { frontmatter as aboutData, Content as AboutBody } from "../content/about.md";
@@ -28,7 +29,9 @@ const panelArt = (file: string) => {
 // A project panel is a quarter of the album at full width, half at tablet, and
 // the whole column on a phone. The life panels are a third, then a half.
 const PROJECT_SIZES = "(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 25vw";
-const LIFE_SIZES = "(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw";
+// The life panels hold two across all the way down, so a phone never needs a
+// full-width file for them.
+const LIFE_SIZES = "(max-width: 1000px) 50vw, 33vw";
 ---
 
 <Base>
@@ -49,7 +52,7 @@ const LIFE_SIZES = "(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw";
           fetchpriority="high"
         />
         <figcaption class="caption caption--in">
-          <span class="caption__name" id="who">{introData.name}</span>
+          <h1 class="caption__name" id="who">{introData.name}</h1>
           <span class="caption__role">{introData.role}</span>
         </figcaption>
         <p class="caption caption--lede">{introData.lede}</p>
@@ -73,11 +76,11 @@ const LIFE_SIZES = "(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw";
          fetch priority, so it stays the largest paint. -->
     <section class="tier tier--projects cut" style={`--cut:2`} id="projects" aria-labelledby="projects-h">
       <div class="tier__head">
-        <h2 id="projects-h">Projects</h2>
+        <h2 id="projects-h">Elsewhere</h2>
       </div>
       {
         panels.projects.map((p) => (
-          <a class="panel panel--link" href={p.link} rel="noopener">
+          <a class="panel panel--link" href={p.link} target="_blank" rel="noopener">
             <Image
               class="panel__img"
               src={panelArt(p.image)}
@@ -111,7 +114,9 @@ const LIFE_SIZES = "(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw";
     </section>
 
     <!-- Tier 5: the life panels -->
-    <section class="tier tier--life cut" style={`--cut:4`} aria-label="Away from the keyboard">
+    <!-- No aria-label: the tier above is headed "Away From The Keyboard" and a
+         label here made a screen reader say it twice. -->
+    <section class="tier tier--life cut" style={`--cut:4`}>
       {
         panels.personal.map((p) => (
           <figure class="panel panel--life">
@@ -132,28 +137,44 @@ const LIFE_SIZES = "(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw";
       }
     </section>
 
-    <!-- Tier 6: the close -->
+    <!-- Tier 6: the close. The decision happens here, so it is a drawn panel
+         like every other tier rather than a bare box, and the credential is
+         restated in narration beside it: six screens have passed since the
+         hero said it. -->
     <section class="tier cut" style={`--cut:5`} id="contact" aria-labelledby="contact-h">
-      <div class="panel panel--text">
-        <div class="contact">
-          <p class="contact__lead" id="contact-h">{contactData.title}</p>
-          <a class="btn btn--primary" href={`mailto:${contactData.email}`}>
-            <Icon name="mail" />
-            {contactData.email}
-          </a>
-          <a class="btn" href={contactData.github} rel="me noopener">
-            <Icon name="github" />
-            {contactData.githubLabel}
-          </a>
-        </div>
-      </div>
+      <figure class="panel panel--close">
+        <Image
+          class="panel__img"
+          src={close}
+          alt="Adam Worley standing at the office window, hands in pockets, looking out over the London skyline."
+          widths={[640, 960, 1360]}
+          sizes="(max-width: 1384px) 100vw, 1360px"
+          format="webp"
+        />
+        <p class="caption caption--close">{introData.role}</p>
+        <figcaption class="panel__strip panel__strip--close">
+          <div class="contact">
+            <h2 class="contact__lead" id="contact-h">{contactData.title}</h2>
+            <a class="btn btn--primary" href={`mailto:${contactData.email}`}>
+              <Icon name="mail" />
+              {contactData.email}
+            </a>
+            <a class="btn" href={contactData.github} target="_blank" rel="me noopener">
+              <Icon name="github" />
+              {contactData.githubLabel}
+            </a>
+          </div>
+        </figcaption>
+      </figure>
     </section>
   </main>
 
   <footer class="foot">
     <div class="foot__inner">
       <span>Adam Worley, Senior Software Developer</span>
-      <span style="margin-left:auto"><a href="https://blog.adamworley.com/blog">Blog</a></span>
+      <span class="foot__end"
+        ><a href="https://blog.adamworley.com/blog" target="_blank" rel="noopener">Blog</a></span
+      >
     </div>
   </footer>
 </Base>
@@ -176,8 +197,10 @@ const LIFE_SIZES = "(max-width: 620px) 100vw, (max-width: 1000px) 50vw, 33vw";
       const doc = document.documentElement;
       // The last tier is short and sits under the footer, so it never reaches
       // the reading line: within a footer's height of the bottom, it is what
-      // you are looking at.
-      const atEnd = window.scrollY + window.innerHeight >= doc.scrollHeight - 80;
+      // you are looking at. On a window taller than the page there is no
+      // bottom to reach, so the reading line decides on its own.
+      const scrollable = doc.scrollHeight > window.innerHeight + 80;
+      const atEnd = scrollable && window.scrollY + window.innerHeight >= doc.scrollHeight - 80;
 
       let active: Element | null = atEnd ? sections[sections.length - 1] : null;
       if (!atEnd) {

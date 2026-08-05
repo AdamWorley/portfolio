@@ -2,7 +2,9 @@
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Rail from "../components/Rail.astro";
+import Icon from "../components/Icon.astro";
 import sup from "../assets/panels/life-sup.png";
+import { frontmatter as contactData } from "../content/contact.md";
 ---
 
 <Base title="404: Page not found | Adam Worley" description="That page isn't here.">
@@ -20,7 +22,7 @@ import sup from "../assets/panels/life-sup.png";
           loading="eager"
         />
         <figcaption class="caption caption--in">
-          <span class="caption__name">404</span>
+          <h1 class="caption__name">404</h1>
           <span class="caption__role">This panel is missing from the album</span>
         </figcaption>
       </figure>
@@ -28,8 +30,12 @@ import sup from "../assets/panels/life-sup.png";
     <section class="tier">
       <div class="panel panel--text">
         <div class="contact">
-          <p class="contact__lead">Nothing here but calm water.</p>
+          <h2 class="contact__lead">Nothing here but calm water.</h2>
           <a class="btn btn--primary" href="/">Back to the first page</a>
+          <a class="btn" href={`mailto:${contactData.email}`}>
+            <Icon name="mail" />
+            {contactData.email}
+          </a>
         </div>
       </div>
     </section>

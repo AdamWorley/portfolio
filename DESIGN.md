@@ -12,6 +12,8 @@ colors:
   sea: "#4d97a5"
   steel: "#49759f"
   red: "#d93a2b"
+  steel-deep: "#3f6890"
+  red-deep: "#c62d20"
 typography:
   display:
     fontFamily: "Baloo 2, system-ui, sans-serif"
@@ -70,7 +72,7 @@ spacing:
   panel-pad: "clamp(1.4rem, 3.2vw, 3rem)"
 components:
   button-primary:
-    backgroundColor: "{colors.red}"
+    backgroundColor: "{colors.red-deep}"
     textColor: "{colors.paper}"
     typography: "{typography.title}"
     rounded: "{rounded.sm}"
@@ -103,7 +105,7 @@ components:
     rounded: "{rounded.sm}"
     padding: "0.2rem 0.45rem"
   nav-link-active:
-    backgroundColor: "{colors.steel}"
+    backgroundColor: "{colors.steel-deep}"
     textColor: "{colors.paper}"
     rounded: "{rounded.sm}"
     padding: "0.2rem 0.45rem"
@@ -168,6 +170,12 @@ pigments.
 - **Paper** (`#f5f1e6`): Panel interiors and gutters.
 
 ### Named Rules
+**The Deep Mix Rule.** Red and steel are the art's pigments and stay as drawn
+inside panels. Where paper text sits on either of them, the chrome uses
+`red-deep` (`#c62d20`, 4.9:1) or `steel-deep` (`#3f6890`, 5.2:1) instead: the
+drawn mixes measure 4.05:1 and 4.30:1, under AA. Same pigment, mixed darker,
+so the page and the panels still read as one palette.
+
 **The One Red Rule.** Adventure red is reserved for the primary action and for
 focal objects inside illustrations. A second red element in the same viewport
 means one of them is wrong.
@@ -271,7 +279,11 @@ Line weight never varies to signal importance, only to signal state.
 - **Text panel:** padding `clamp(1.4rem, 3.2vw, 3rem)` block, `clamp(1.4rem, 4vw, 4rem)`
   inline; prose fills the panel in columns rather than floating a centred measure in it.
 - **Link panel:** the whole panel is the anchor. Hover draws the inner ink
-  line and floods the caption strip steel with paper text, no size change.
+  line and floods the caption strip steel-deep with paper text, no size change.
+- **Closing panel:** the tier where the visitor decides is a picture panel like
+  any other, not a bare box. Picture at `2/1` (`5/4` below `620px`, so the
+  standing figure stays whole), the credential restated in a caption box in the
+  open corner, and the actions carried in the caption strip beneath.
 
 ### Caption Boxes
 Album yellow, `3px` ink border, `4px` radius, label type. Positioned absolutely
@@ -288,9 +300,12 @@ balloon would be a lie about where the words come from. Captions only.
 
 ### Navigation
 Label type in the yellow rail, sticky, `3px` ink bottom rule. Hover inverts to
-ink field with yellow text; the current tier takes the steel field with paper
-text via `aria-current="true"`, driven by an IntersectionObserver. Below `620px`
-the rail stacks name over a single evenly spaced row of links.
+ink field with yellow text; the current tier takes the steel-deep field with
+paper text via `aria-current="true"`. The marker is driven by a reading line at
+40% of the viewport rather than by intersection ratios, because a ratio pits a
+short tier against a tall one and the short one always wins. Below `620px` the
+rail stacks name over a single evenly spaced row of links, each padded to a
+44px target.
 
 ### Icons
 Authored inline SVG only, drawn at `2.2–2.5` stroke to sit with the `3px` panel

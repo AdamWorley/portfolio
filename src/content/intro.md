@@ -1,6 +1,6 @@
 ---
 name: Adam Worley
-role: Senior Software Developer
+role: Senior Software Developer at netwealth
 lede: Over a decade in C#, and the infrastructure underneath it.
 ---
 
