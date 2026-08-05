@@ -1,114 +1,71 @@
-<p align="center">
-  <a href="https://cara.lekoarts.de">
-    <img alt="LekoArts" src="https://img.lekoarts.de/gatsby/gatsby-site-illustration.png" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Starter Portfolio: Cara
-</h1>
+# adamworley.com
 
-<p align="center">
-  <a href="https://github.com/LekoArts/gatsby-starter-portfolio-cara/blob/master/LICENSE">
-    <img src="https://img.shields.io/badge/license-0BSD-blue.svg" alt="Gatsby Starter Portfolio: Cara is released under the 0BSD license." />
-  </a>
-  <a href="https://github.com/sponsors/LekoArts">
-    <img alt="GitHub Sponsors" src="https://img.shields.io/github/sponsors/LekoArts">
-  </a>
-  <a href="https://www.lekoarts.de?utm_source=cara&utm_medium=Starter">
-    <img alt="Website" src="https://img.shields.io/badge/-website-blue">
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=lekoarts_de">
-    <img src="https://img.shields.io/twitter/follow/lekoarts_de.svg?label=Follow%20@lekoarts_de" alt="Follow @lekoarts_de" />
-  </a>
-</p>
+Personal portfolio for Adam Worley, a software engineer with over a decade of
+experience in C#, infrastructure and cloud tooling.
 
-Playful and Colorful One-Page portfolio featuring Parallax effects and animations. Using the Gatsby Theme [`@lekoarts/gatsby-theme-cara`](https://github.com/LekoArts/gatsby-themes/tree/master/themes/gatsby-theme-cara).
+Built with [Astro](https://astro.build). Static output, no framework runtime;
+the only client-side JavaScript is a small `IntersectionObserver` that marks the
+current section in the navigation.
 
-[**Demo Website**](https://cara.lekoarts.de)
+## Design
 
-Also be sure to check out other [Free & Open Source Gatsby Themes](https://themes.lekoarts.de) and my [Personal Website](https://www.lekoarts.de?utm_source=cara&utm_medium=Starter).
+The site is built as a **ligne claire comic album page**, one page read tier by
+tier, every piece of content inside a panel bounded by the same black line.
 
-## ✨ Features
+- `PRODUCT.md`, durable product truth: who the site is for and what must not change.
+- `DESIGN.md`, the design system: tokens, type ramp, component rules.
+- `.impeccable/`, design records: the approved comp, craft references, surface brief.
 
-- Theme UI-based theming
-- react-spring parallax effect
-- CSS Animations on Shapes
+Before changing the look, read `DESIGN.md`. The short version: one unvarying 3px
+black line on every shape, flat unmodulated colour fills, and no shadows,
+gradients or blurs anywhere.
 
-## 🚀 Getting Started
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/LekoArts/gatsby-starter-portfolio-cara)
-
-### 1. **Create a Gatsby site.**
-
-Use `git` to clone the site and navigate into it:
+## Develop
 
 ```sh
-git clone https://github.com/LekoArts/gatsby-starter-portfolio-cara project-name
-cd project-name
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # static output to dist/
+npm run preview  # serve the built site locally
 ```
 
-### 2. **Install dependencies.**
+Requires Node 22 (see `.nvmrc`).
 
-If you use npm 7 or above use the `--legacy-peer-deps` flag. If you use npm 6 you can use `npm install`.
+## Editing content
 
-```sh
-npm install --legacy-peer-deps
-```
+All copy lives in Markdown and JSON, no components need touching.
 
-### 3. **Open the code and start customizing!**
+| File | Contents |
+|---|---|
+| `src/content/intro.md` | Name, role, the hero balloon line, and the intro prose |
+| `src/content/about.md` | The "Away From The Keyboard" prose |
+| `src/content/contact.md` | Email address and GitHub link |
+| `src/content/panels.json` | Project links and personal panels, with image paths and alt text |
 
-Start the site by running `npm run develop`.
+Panel illustrations live in `src/assets/panels/` as full-resolution PNG, each
+with its generation prompt embedded in the file and repeated in a `.png.json`
+sidecar. Astro's `<Image />` derives the sized, hashed WebP the browser gets, so
+there is one master per panel and no hand-resizing. `panels.json` refers to them
+by filename; drop a new PNG in that folder and reference it the same way.
 
-Your site is now running at `http://localhost:8000`!
+## Deploy, Cloudflare Pages
 
-If you want to learn more about how you can use a Gatsby starter that is configured with a Gatsby theme, you can check out this [shorter](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/using-a-gatsby-theme/) or [longer](https://www.gatsbyjs.com/tutorial/using-a-theme/) tutorial. The tutorials don't exactly apply to this starter however the concepts are the same.
+Static site, no adapter or Functions required.
 
-## 📝 Using and modifying this starter
+| Setting | Value |
+|---|---|
+| Framework preset | Astro |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node version | 22 (`.nvmrc` is respected; otherwise set `NODE_VERSION=22`) |
 
-**Important Note:** Please read the guide [Shadowing in Gatsby Themes](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/shadowing/) to understand how to customize the underlying theme!
+`public/_headers` ships the cache and security headers: hashed `/_astro/*`
+assets are immutable for a year (every processed image lands there), and HTML
+always revalidates so a content edit goes live on the next request.
 
-This starter creates a new Gatsby site that installs and configures the theme [`@lekoarts/gatsby-theme-cara`](https://github.com/LekoArts/gatsby-themes/tree/master/themes/gatsby-theme-cara).
+`dist/404.html` is served automatically for unmatched routes, no `_redirects`
+file is needed.
 
-Have a look at the theme's README and files to see what options are available and how you can shadow the various components including Theme UI. Generally speaking you will want to place your files into `src/@lekoarts/gatsby-theme-cara/` to shadow/override files. The Theme UI config can be configured by shadowing its files in `src/gatsby-plugin-theme-ui/`.
+## Licence
 
-### Changing content
-
-The content of this project is defined in four `.mdx` files inside the theme's `sections` folder. You can override the files `intro.mdx`, `projects.mdx`, `about.mdx` and `contact.mdx`. This starter has overridden the `intro.mdx` file as an example. Place the other files in the same `src/@lekoarts/gatsby-theme-cara/sections/` folder.
-
-You have to use the `<ProjectCard />` component inside `projects.mdx` to display the cards. Example:
-
-```md
-## Projects
-
-<ProjectCard title="Freiheit" link="https://www.behance.net/gallery/58937147/Freiheit" bg="linear-gradient(to right, #D4145A 0%, #FBB03B 100%)">
-This project is my entry to Adobe's #ChallengeYourPerspective contest.
-</ProjectCard>
-```
-
-### Change your `static` folder
-
-The `static` folder contains the icons, social media images and robots.txt. Don't forget to change these files, too!
-
-## 🤔 Questions or problems?
-
-Please open up an issue on the main repository: [LekoArts/gatsby-themes](https://github.com/LekoArts/gatsby-themes). Thanks!
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on Gatsby's website](https://www.gatsbyjs.com/).
-
-### Themes
-
-- To learn more about Gatsby themes specifically, we recommend checking out the [theme docs](https://www.gatsbyjs.com/docs/themes/).
-
-### General
-
-- **For most developers, I recommend starting with the [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/docs/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to Gatsby's documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Reference Guides_ and _Gatsby API_ sections in the sidebar.
-
-## 🌟 Supporting me
-
-Thanks for using this project! I'm always interested in seeing what people do with my projects, so don't hesitate to tag me on [Twitter](https://twitter.com/lekoarts_de) and share the project with me.
-
-Please star this project, share it on Social Media or consider supporting me on [Patreon](https://www.patreon.com/lekoarts) or [GitHub Sponsor](https://github.com/sponsors/LekoArts)!
+0BSD.

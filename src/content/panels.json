@@ -1,0 +1,80 @@
+{
+  "projects": [
+    {
+      "id": "crawley-dog-walkers",
+      "title": "Crawley Dog Walkers",
+      "link": "https://crawleydogwalkers.com",
+      "caption": "My wife's dog walking business.",
+      "image": "project-dog-walkers.png",
+      "alt": "Three dogs on red leads walking a park path (a tri-colour border collie, an old yellow labrador and a young chocolate labrador), drawn in flat clear-line colour"
+    },
+    {
+      "id": "netwealth",
+      "title": "Netwealth",
+      "link": "https://www.netwealth.com",
+      "caption": "Where I work now.",
+      "image": "project-netwealth.png",
+      "alt": "A city office building under a flat blue sky, drawn in flat clear-line colour"
+    },
+    {
+      "id": "ajw-group",
+      "title": "AJW Group",
+      "link": "https://www.ajw-group.com",
+      "caption": "Where I worked before.",
+      "image": "project-ajw.png",
+      "alt": "An aircraft parts warehouse with racking and crates, drawn in flat clear-line colour"
+    },
+    {
+      "id": "blog",
+      "title": "Blog",
+      "link": "https://blog.adamworley.com/blog",
+      "caption": "Where I write things up.",
+      "image": "project-blog.png",
+      "alt": "A writing desk with an open notebook, lamp and coffee, drawn in flat clear-line colour"
+    }
+  ],
+  "personal": [
+    {
+      "id": "climbing",
+      "title": "Climbing",
+      "caption": "A physical and a mental problem at once.",
+      "image": "life-climbing.png",
+      "alt": "An indoor climbing wall covered in coloured holds, drawn in flat clear-line colour"
+    },
+    {
+      "id": "running",
+      "title": "Running",
+      "caption": "Where a busy week goes quiet.",
+      "image": "life-running.png",
+      "alt": "A runner mid-stride on a park path lined with trees, drawn in flat clear-line colour"
+    },
+    {
+      "id": "badminton",
+      "title": "Badminton",
+      "caption": "Friendly matches that keep me active.",
+      "image": "life-badminton.png",
+      "alt": "A badminton racket and shuttlecock on a sports hall court, drawn in flat clear-line colour"
+    },
+    {
+      "id": "paddleboarding",
+      "title": "Paddleboarding",
+      "caption": "Flat water and no noise at all.",
+      "image": "life-sup.png",
+      "alt": "A stand-up paddleboard and paddle on flat calm water, drawn in flat clear-line colour"
+    },
+    {
+      "id": "films-games",
+      "title": "Films & Games",
+      "caption": "Films, games, good moments.",
+      "image": "life-films.png",
+      "alt": "A sofa facing a television with a game controller on the cushion, drawn in flat clear-line colour"
+    },
+    {
+      "id": "coffee",
+      "title": "Coffee",
+      "caption": "Or a decent coffee.",
+      "image": "life-coffee.png",
+      "alt": "A cup of coffee and a moka pot on a kitchen counter, drawn in flat clear-line colour"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+---
+import "@fontsource/baloo-2/400.css";
+import "@fontsource/baloo-2/700.css";
+import "@fontsource/baloo-2/800.css";
+import "@fontsource-variable/asap";
+import "../styles/global.css";
+
+const {
+  title = "Adam Worley | Senior Software Developer",
+  description = "Adam Worley is a Senior Software Developer at netwealth, where he led the team behind MyNetwealth and sits on the platform team. Over a decade in C#, plus Terraform, container orchestrators and Go tooling.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f5ce3e" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/og.webp", Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <!--
+      IMPECCABLE DIRECTION CONTRACT, seed 815674f9
+      THESIS: This is one comic album page, read tier by tier. It refuses the
+        portfolio default of a hero above a grid of same-size project cards.
+      OWN-WORLD: One unvarying 3px black line bounds every shape. Flat
+        unmodulated fills only, sky, paper, ochre, album yellow, sea, steel
+        with one adventure red spent solely on the primary action. No gradient,
+        no shadow, no blur, no glass. Baloo 2 caps as lettering, Asap as body,
+        yellow caption boxes as real components, and no speech balloons.
+      STORY: A recruiter learns in seconds that Adam is a decade-deep C#
+        engineer at netwealth who also builds infrastructure, sees the person
+        as well as the CV, and emails him.
+      FIRST VIEWPORT: Yellow rail; a 21:9 establishing panel of a desk looking
+        out over London; yellow caption box upper-left carrying ADAM WORLEY /
+        SENIOR SOFTWARE DEVELOPER; a second caption box lower-right carrying the lede.
+      FORM: Ligne claire adventure album, the user's chosen challenger over
+        assigned grounded candidate 5 (The Shooting Script), seed 815674f9.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with
+        the finish review, the verdict, and DESIGN.md.
+    -->
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "prompt": "A living room at night seen from behind a sofa: the back of the sofa in the foreground, a games controller resting on a cushion, and a large television screen glowing flat pale blue on the wall opposite. Ligne claire clear-line comic album illustration. One even unvarying black outline of consistent weight on every single shape. Flat unmodulated colour fills. Absolutely no gradients, no cast shadows, no shading, no hatching, no texture, no photorealism, no 3D rendering. Strict palette only: sky blue, paper white, sand ochre, album yellow, sea green, steel blue, and one adventure red used sparingly. IMPORTANT: no text, no lettering, no words, no numbers, no logos, no brand marks, no signage, no watermarks anywhere in the image. No panel border, no black frame, no caption box, no speech balloon, no rounded corners, no letterboxing, no white margin: the illustration bleeds to all four edges of the frame. No visible human faces.",
+  "createdAt": "2026-08-05T09:26:37.313Z",
+  "tool": "generate-image.mjs",
+  "model": "gpt-image-2"
+}
