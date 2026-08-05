@@ -5,5 +5,6 @@ github: https://github.com/AdamWorley
 githubLabel: github.com/AdamWorley
 ---
 
-You can find me on [Github](https://github.com/AdamWorley) and contact me by
-email to <hello@adamworley.com>
+<!-- The closing panel renders these four fields and nothing else, so this file
+     carries no body prose: copy written here would never reach the page. -->
+
