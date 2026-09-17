@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-05T00:00:00.000Z",
+  "title": "Design System: Adam Worley Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#101010",
+        "tonalRamp": [
+          "#000000",
+          "#101010",
+          "#2a2a2a",
+          "#454545",
+          "#636363",
+          "#8b8b8b",
+          "#b6b6b6",
+          "#e4e4e4"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f5f1e6",
+        "tonalRamp": [
+          "#2b2822",
+          "#4a453a",
+          "#6b6555",
+          "#8e8672",
+          "#b1a992",
+          "#d0c8b3",
+          "#e6dfcd",
+          "#f5f1e6"
+        ]
+      },
+      "sky": {
+        "role": "secondary",
+        "displayName": "Sky",
+        "canonical": "#6fc0f2",
+        "tonalRamp": [
+          "#0b2c3f",
+          "#134763",
+          "#1c6389",
+          "#2680ae",
+          "#3f9dd0",
+          "#6fc0f2",
+          "#a9dbf9",
+          "#d9eefc"
+        ]
+      },
+      "sky-pale": {
+        "role": "secondary",
+        "displayName": "Pale Sky",
+        "canonical": "#a9dbf9",
+        "tonalRamp": [
+          "#12303f",
+          "#1c4d64",
+          "#276b8a",
+          "#358ab1",
+          "#5fa9d5",
+          "#88c5ea",
+          "#a9dbf9",
+          "#dcf0fd"
+        ]
+      },
+      "sky-deep": {
+        "role": "tertiary",
+        "displayName": "Deep Sky",
+        "canonical": "#296e8e",
+        "tonalRamp": [
+          "#0a1c24",
+          "#123039",
+          "#1b4a5e",
+          "#296e8e",
+          "#3d8fb3",
+          "#63aecd",
+          "#95cbe2",
+          "#cbe6f1"
+        ]
+      },
+      "ochre": {
+        "role": "tertiary",
+        "displayName": "Sand Ochre",
+        "canonical": "#cba647",
+        "tonalRamp": [
+          "#2e2409",
+          "#4b3b12",
+          "#6a541c",
+          "#8b6f26",
+          "#ad8a33",
+          "#cba647",
+          "#e0c47f",
+          "#f1e2ba"
+        ]
+      },
+      "yellow": {
+        "role": "secondary",
+        "displayName": "Album Yellow",
+        "canonical": "#f5ce3e",
+        "tonalRamp": [
+          "#3a2c02",
+          "#5c4707",
+          "#80630d",
+          "#a58015",
+          "#c99f22",
+          "#f5ce3e",
+          "#f9e185",
+          "#fdf2c6"
+        ]
+      },
+      "sea": {
+        "role": "tertiary",
+        "displayName": "Sea Green",
+        "canonical": "#4d97a5",
+        "tonalRamp": [
+          "#0d2226",
+          "#153a40",
+          "#1f545c",
+          "#2b7079",
+          "#3a8794",
+          "#4d97a5",
+          "#84bcc5",
+          "#c0dde2"
+        ]
+      },
+      "steel": {
+        "role": "tertiary",
+        "displayName": "Steel Blue",
+        "canonical": "#49759f",
+        "tonalRamp": [
+          "#0d1720",
+          "#152636",
+          "#1f394f",
+          "#2c5170",
+          "#3a6389",
+          "#49759f",
+          "#84a4c3",
+          "#c1d2e2"
+        ]
+      },
+      "red": {
+        "role": "primary",
+        "displayName": "Adventure Red",
+        "canonical": "#d93a2b",
+        "tonalRamp": [
+          "#310a06",
+          "#51110b",
+          "#741912",
+          "#98221a",
+          "#bc2c22",
+          "#d93a2b",
+          "#e88276",
+          "#f5c4bd"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name, in the hero caption box. Once per page."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Tier headings, set on the sky above their panels."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Panel caption strip headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose in text panels, columns of 30ch."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Caption boxes, navigation, footer, strip subtitles. Always uppercase."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The claim in the hero's second caption box."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "cut-in",
+        "value": "1ms steps(1, end) backwards, delay calc(var(--cut) * 110ms)",
+        "purpose": "The album turns its tiers on in reading order. A hard cut, never a fade, and time-based so content is never left hidden."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "lg",
+        "value": "1200px"
+      },
+      {
+        "name": "md",
+        "value": "1000px"
+      },
+      {
+        "name": "sm",
+        "value": "620px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single call to action per viewport; used for the email address.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\"><rect x=\"2.5\" y=\"5\" width=\"19\" height=\"14\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"2.5\"/><path d=\"M3 6.5 12 13l9-6.5\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>HELLO@ADAMWORLEY.COM</a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:0.5rem; border:3px solid #101010; border-radius:4px; background:#f5f1e6; color:#101010; font-family:'Baloo 2',system-ui,sans-serif; font-weight:700; font-size:1.05rem; text-transform:uppercase; letter-spacing:0.01em; text-decoration:none; padding:0.6rem 1.1rem; cursor:pointer; } .ds-btn-primary { background:#d93a2b; color:#f5f1e6; } .ds-btn { position:relative; } .ds-btn::after { content:''; position:absolute; inset:0; border:3px solid transparent; border-radius:inherit; pointer-events:none; } .ds-btn:hover::after { border-color:#101010; } .ds-btn:focus-visible { outline:3px solid #101010; outline-offset:3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Paper-field action sitting beside the primary; identical geometry.",
+      "html": "<a class=\"ds-btn ds-btn-secondary\" href=\"#\">GITHUB.COM/ADAMWORLEY</a>",
+      "css": ".ds-btn-secondary { display:inline-flex; align-items:center; gap:0.5rem; border:3px solid #101010; border-radius:4px; background:#f5f1e6; color:#101010; font-family:'Baloo 2',system-ui,sans-serif; font-weight:700; font-size:1.05rem; text-transform:uppercase; text-decoration:none; padding:0.6rem 1.1rem; } .ds-btn-secondary { position:relative; } .ds-btn-secondary::after { content:''; position:absolute; inset:0; border:3px solid transparent; border-radius:inherit; pointer-events:none; } .ds-btn-secondary:hover::after { border-color:#101010; }"
+    },
+    {
+      "name": "Picture Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "The system's atom: a square-cornered frame holding an illustration and a caption strip.",
+      "html": "<figure class=\"ds-panel\"><div class=\"ds-panel-art\"></div><figcaption class=\"ds-strip\"><h3>CLIMBING</h3><p>Indoor rock climbing is my go-to.</p></figcaption></figure>",
+      "css": ".ds-panel { border:3px solid #101010; background:#f5f1e6; overflow:hidden; display:flex; flex-direction:column; max-width:320px; } .ds-panel-art { aspect-ratio:1/1; background:#6fc0f2; } .ds-strip { border-top:3px solid #101010; background:#f5f1e6; padding:0.55rem 0.7rem; } .ds-strip h3 { margin:0; font-family:'Baloo 2',system-ui,sans-serif; font-weight:800; text-transform:uppercase; font-size:1.05rem; line-height:1.05; } .ds-strip p { margin:0.25rem 0 0; font-family:'Asap Variable',system-ui,sans-serif; font-size:0.8rem; line-height:1.3; }"
+    },
+    {
+      "name": "Link Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "A whole panel acting as a link; engagement thickens the line and floods the strip steel.",
+      "html": "<a class=\"ds-panel-link\" href=\"#\"><div class=\"ds-panel-art\"></div><span class=\"ds-strip\"><h3>NETWEALTH</h3><p>Currently employed by Netwealth</p></span></a>",
+      "css": ".ds-panel-link { display:flex; flex-direction:column; border:3px solid #101010; background:#f5f1e6; overflow:hidden; text-decoration:none; color:#101010; max-width:320px; } .ds-panel-link .ds-panel-art { aspect-ratio:4/3; background:#49759f; } .ds-panel-link { position:relative; } .ds-panel-link::after { content:''; position:absolute; inset:0; border:3px solid transparent; pointer-events:none; } .ds-panel-link:hover::after { border-color:#101010; } .ds-panel-link:hover .ds-strip { background:#49759f; color:#f5f1e6; }"
+    },
+    {
+      "name": "Caption Box",
+      "kind": "chip",
+      "refersTo": "caption-box",
+      "description": "Album yellow narration. Sits inside a panel or as a strip beneath one.",
+      "html": "<div class=\"ds-caption\"><span class=\"ds-caption-name\">ADAM WORLEY</span><span class=\"ds-caption-role\">SOFTWARE ENGINEER</span></div>",
+      "css": ".ds-caption { display:inline-block; background:#f5ce3e; border:3px solid #101010; border-radius:4px; padding:0.5rem 0.7rem; font-family:'Asap Variable',system-ui,sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.02em; } .ds-caption-name { display:block; font-family:'Baloo 2',system-ui,sans-serif; font-weight:800; font-size:2.4rem; line-height:0.92; letter-spacing:-0.015em; } .ds-caption-role { display:block; font-size:0.85rem; letter-spacing:0.08em; margin-top:0.2rem; }"
+    },
+    {
+      "name": "Navigation Rail",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky album-yellow rail; the current tier takes the steel field.",
+      "html": "<header class=\"ds-rail\"><a class=\"ds-rail-name\" href=\"#\">Adam Worley</a><nav class=\"ds-rail-nav\"><a href=\"#\" aria-current=\"true\">Work</a><a href=\"#\">Projects</a><a href=\"#\">Personal</a><a href=\"#\">Contact</a></nav></header>",
+      "css": ".ds-rail { display:flex; align-items:baseline; gap:1.5rem; background:#f5ce3e; border-bottom:3px solid #101010; padding:0.5rem 1.25rem; } .ds-rail-name { font-family:'Baloo 2',system-ui,sans-serif; font-weight:800; font-size:1.35rem; text-transform:uppercase; letter-spacing:-0.01em; text-decoration:none; color:#101010; } .ds-rail-nav { margin-left:auto; display:flex; gap:1.25rem; } .ds-rail-nav a { font-family:'Asap Variable',system-ui,sans-serif; font-weight:600; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.06em; text-decoration:none; color:#101010; padding:0.2rem 0.45rem; border-radius:4px; } .ds-rail-nav a:hover { background:#101010; color:#f5ce3e; } .ds-rail-nav a[aria-current=\"true\"] { background:#49759f; color:#f5f1e6; }"
+    },
+    {
+      "name": "Lede Caption",
+      "kind": "custom",
+      "refersTo": "caption-lede",
+      "description": "The hero's second caption box, carrying the claim. Narration, not speech; there is no balloon in this system.",
+      "html": "<p class=\"ds-caption-lede\">OVER A DECADE IN C#, AND THE INFRASTRUCTURE UNDERNEATH IT.</p>",
+      "css": ".ds-caption-lede { display:inline-block; max-width:23rem; background:#f5ce3e; border:3px solid #101010; border-radius:4px; padding:0.7rem 0.9rem; font-family:'Asap Variable',system-ui,sans-serif; font-weight:600; font-size:1.05rem; line-height:1.3; letter-spacing:0.01em; text-transform:uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Album Page",
+    "overview": "The site is not a website with sections; it is one comic album page read tier by tier. Every piece of content lives inside a panel bounded by the same black line, and narration sits in yellow caption boxes. The discipline is ligne claire: a single unvarying line weight describes everything, and colour arrives as flat unmodulated fields. Nothing is shaded, blurred, or shadowed - depth is produced entirely by flat colour separation and the black contour. The page ground is saturated sky, not paper. Paper is what panels are made of; the sky is what the album sits on.",
+    "keyCharacteristics": [
+      "One unvarying 3px black line bounds every shape.",
+      "Seven flat colour roles, no tints or gradients between them.",
+      "Zero shadows, blurs, or glass.",
+      "Rounded heavy display caps against a clean humanist body face.",
+      "Illustration, not iconography, does the heavy lifting."
+    ],
+    "rules": [
+      {
+        "name": "The One Red Rule",
+        "body": "Adventure red is reserved for the primary action and for focal objects inside illustrations. A second red element in the same viewport means one of them is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Grey Rule",
+        "body": "De-emphasis is done with size and weight, never with a lighter grey. Every glyph on the page is ink on a flat field.",
+        "section": "colors"
+      },
+      {
+        "name": "The All-Caps Chrome Rule",
+        "body": "Every piece of interface furniture is uppercase. Sentence case is reserved for prose, so narration and interface never blur together.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Rule",
+        "body": "If a surface needs to feel separate, give it its own panel and its own flat fill. Reaching for elevation means the layout has not been resolved.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do bound every new element with the same 3px ink line.",
+      "Do express state with the inner ::after line and flat colour fill - never by widening a border, which reflows the page.",
+      "Do author a new clear-line illustration when a section needs an image, and ship it as a raster asset at panel aspect.",
+      "Do keep all interface text uppercase and all prose sentence case.",
+      "Do let panels grow to fit their captions rather than clipping them."
+    ],
+    "donts": [
+      "Don't add a shadow, gradient, blur, or glass surface. The world has none.",
+      "Don't introduce a second line weight for decoration.",
+      "Don't use grey text for de-emphasis.",
+      "Don't put a second red element in a viewport that already has the primary action.",
+      "Don't substitute a gradient, an icon tile, or a stock photograph where a clear-line panel belongs.",
+      "Don't set height on a panel image without releasing the height attribute's presentational pixel value first - aspect-ratio will not govern until height: auto is set.",
+      "Don't add a speech balloon. The page has narration and no speaker, so a tail would misstate where the words come from."
+    ]
+  }
+}

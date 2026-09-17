@@ -1,0 +1,19 @@
+---
+const { home = false } = Astro.props;
+---
+
+<header class="rail">
+  <div class="rail__inner">
+    <a class="rail__name" href="/">Adam Worley</a>
+    {
+      home && (
+        <nav class="rail__nav" aria-label="Sections">
+          <a href="#work">Work</a>
+          <a href="#projects">Elsewhere</a>
+          <a href="#life">Personal</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      )
+    }
+  </div>
+</header>

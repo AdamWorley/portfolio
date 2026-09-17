@@ -62,7 +62,21 @@ typings/
 
 .cache
 **/.cache
-public
+
+# Astro build output and cache. (`public/` was ignored under Gatsby, which
+# built into it; under Astro it is the static source directory and must be
+# committed: it holds the icons and the social preview image.)
+dist
+.astro
+
+# Impeccable working artifacts: decision-round sketches, QA screenshots and
+# decision-page payloads. The durable records are committed: PRODUCT.md,
+# DESIGN.md, .impeccable/design.json, the surface brief and the approved comps.
+# The full-resolution panel masters are not design artifacts at all; they live
+# in src/assets/panels/ and are build inputs.
+.impeccable/sketches/
+.impeccable/shots/
+.impeccable/questions/
 
 .idea
 .vscode

@@ -1,0 +1,623 @@
+/* ==========================================================================
+   The Album Page: ligne claire clear-line system
+   One unvarying black line. Flat unmodulated fills. No gradient, no shadow.
+   ========================================================================== */
+
+:root {
+  /* Sampled from the built panel art, not guessed. */
+  --ink: #101010;
+  --sky: #6fc0f2;
+  --sky-pale: #a9dbf9;
+  --sky-deep: #296e8e;
+  --paper: #f5f1e6;
+  --ochre: #cba647;
+  --yellow: #f5ce3e;
+  --sea: #4d97a5;
+  --steel: #49759f;
+  --red: #d93a2b;
+
+  /* The same two pigments, mixed darker for the cases where paper text sits on
+     them. The art's red and steel measure 4.05:1 and 4.30:1 against paper,
+     under AA; these measure 4.9:1 and 5.2:1. The illustrations keep the
+     lighter mix, so the page and the panels still read as one palette. */
+  --red-deep: #c62d20;
+  --steel-deep: #3f6890;
+
+  /* One weight, everywhere. "Heavier" is drawn as a second inner line on a
+     pseudo-element, never as a wider border, which would resize the box. */
+  --line: 3px;
+  --gutter: 12px;
+  --radius: 4px;
+
+  --tier-max: 1360px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--ink);
+  font-family: "Asap Variable", system-ui, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.62;
+  /* The album page sits on the sky, with a black edge on every side. */
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+figure,
+figcaption,
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: var(--line) solid var(--ink);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Header rail: album yellow, black rule beneath
+   -------------------------------------------------------------------------- */
+
+.rail {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--yellow);
+  border-bottom: var(--line) solid var(--ink);
+}
+
+.rail__inner {
+  max-width: var(--tier-max);
+  margin: 0 auto;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+}
+
+.rail__name {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.rail__nav {
+  margin-left: auto;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.rail__nav a {
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius);
+}
+
+.rail__nav a:hover {
+  background: var(--ink);
+  color: var(--yellow);
+}
+
+/* The board's active state: the steel field, not an underline. */
+.rail__nav a[aria-current="true"] {
+  background: var(--steel-deep);
+  color: var(--paper);
+}
+
+/* --------------------------------------------------------------------------
+   The album page: tiers of panels
+   -------------------------------------------------------------------------- */
+
+.album {
+  max-width: var(--tier-max);
+  margin: 0 auto;
+  padding: var(--gutter) var(--gutter) 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter);
+}
+
+.tier {
+  display: grid;
+  gap: var(--gutter);
+  /* The rail is sticky, so a jump from it would otherwise park the tier's
+     heading underneath the rail. Clear the rail plus a gutter. */
+  scroll-margin-top: calc(3.25rem + var(--gutter));
+}
+
+.tier--projects {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.tier--life {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tier__head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  margin-bottom: 0.35rem;
+}
+
+.tier__head h2 {
+  font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+}
+
+/* --------------------------------------------------------------------------
+   Panel: the single bounded shape of this world
+   -------------------------------------------------------------------------- */
+
+.panel {
+  position: relative;
+  border: var(--line) solid var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.panel__img {
+  width: 100%;
+  /* The width/height attributes reserve space against layout shift, but they
+     also set a presentational pixel height; aspect-ratio only governs once
+     that is released. */
+  height: auto;
+  object-fit: cover;
+}
+
+.panel--hero {
+  aspect-ratio: 21 / 9;
+}
+
+.panel--hero .panel__img {
+  height: 100%;
+  object-position: 50% 62%;
+}
+
+/* Panel that carries prose instead of a picture. */
+.panel--text {
+  padding: clamp(1.4rem, 3.2vw, 3rem) clamp(1.4rem, 4vw, 4rem);
+}
+
+/* An album's text page fills its panel; it does not float a column in it.
+   Two columns, because balancing four unbreakable paragraphs across three
+   leaves the last one empty. */
+.panel--text .prose {
+  columns: 2;
+  column-gap: 3.25rem;
+}
+
+@media (max-width: 820px) {
+  .panel--text .prose {
+    columns: 1;
+  }
+}
+
+.prose p {
+  margin: 0 0 1rem;
+  break-inside: avoid;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+.prose a {
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Caption box: album yellow narration
+   -------------------------------------------------------------------------- */
+
+.caption {
+  background: var(--yellow);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.7rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.caption--in {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  max-width: min(22rem, 60%);
+}
+
+.caption--in .caption__name {
+  display: block;
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4.2vw, 3.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+}
+
+.caption--in .caption__role {
+  display: block;
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  letter-spacing: 0.08em;
+  margin-top: 0.2rem;
+}
+
+/* Caption strip beneath a panel picture. */
+.panel__strip {
+  border-top: var(--line) solid var(--ink);
+  background: var(--paper);
+  padding: 0.55rem 0.7rem;
+}
+
+.panel__strip h3 {
+  font-size: 1.05rem;
+  line-height: 1.05;
+}
+
+.panel__strip p {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+/* The lede caption: narration, not speech. A balloon would promise a speaker
+   the panel does not have, so this is a caption box like the name box, set
+   larger and parked in the opposite corner. */
+.caption--lede {
+  position: absolute;
+  right: 1rem;
+  bottom: 1.25rem;
+  max-width: min(23rem, 46%);
+  font-size: clamp(0.85rem, 1.35vw, 1.05rem);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  padding: 0.7rem 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons: the red one is the single action per viewport
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: 0.6rem 1.1rem;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--red-deep);
+  color: var(--paper);
+}
+
+/* Engaged state thickens the line from the inside, on a pseudo-element.
+   Growing the border itself would resize the box and shove the page. */
+.btn {
+  position: relative;
+}
+
+.btn::after,
+.panel--link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: var(--line) solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.btn:hover::after,
+.panel--link:hover::after {
+  border-color: var(--ink);
+}
+
+.btn svg {
+  flex: none;
+}
+
+/* --------------------------------------------------------------------------
+   Link panels: selection is the same black line drawn heavier
+   -------------------------------------------------------------------------- */
+
+.panel--link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.panel--link .panel__img {
+  aspect-ratio: 4 / 3;
+}
+
+.panel--link .panel__strip {
+  margin-top: auto;
+}
+
+.panel--link:hover .panel__strip {
+  background: var(--steel-deep);
+  color: var(--paper);
+}
+
+.panel--life {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel--life .panel__img {
+  aspect-ratio: 1 / 1;
+}
+
+.panel--life .panel__strip {
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Contact: the closing panel
+   -------------------------------------------------------------------------- */
+
+/* The tier where the visitor decides is a drawn panel like every other tier,
+   with the actions in its caption strip and the credential restated in
+   narration, six screens after the hero said it. */
+.panel--close .panel__img {
+  /* Shallower than the hero's 21:9: at that crop the standing figure loses his
+     head. This keeps him whole from hair to shoes. */
+  aspect-ratio: 2 / 1;
+  object-position: 50% 20%;
+}
+
+.caption--close {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  max-width: min(20rem, 52%);
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  letter-spacing: 0.06em;
+  padding: 0.6rem 0.8rem;
+}
+
+.panel__strip--close {
+  padding: clamp(1rem, 2.4vw, 1.6rem) clamp(1rem, 3vw, 2rem);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.contact__lead {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+  line-height: 0.95;
+  margin: 0;
+  flex: 1 1 16rem;
+}
+
+.foot {
+  border-top: var(--line) solid var(--ink);
+  background: var(--yellow);
+}
+
+.foot__end {
+  margin-left: auto;
+}
+
+.foot__inner {
+  max-width: var(--tier-max);
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   Motion: the album cuts between panels, it does not ease between them
+   -------------------------------------------------------------------------- */
+
+/* The album turns its tiers on in reading order: a hard cut each time, never
+   a fade. Time-based, so it always completes: content is never left hidden by
+   an unsupported or inactive timeline. */
+@media (prefers-reduced-motion: no-preference) {
+  .cut {
+    animation: cut-in 1ms steps(1, end) backwards;
+    animation-delay: calc(var(--cut, 0) * 110ms);
+  }
+
+  @keyframes cut-in {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive: tiers stack in reading order, one panel at a time
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .tier--life {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tier--projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .panel--hero {
+    aspect-ratio: 16 / 10;
+  }
+
+  .panel--close .panel__img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .panel--text .prose {
+    columns: 1;
+  }
+}
+
+@media (max-width: 620px) {
+  .rail__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0.45rem 0.9rem 0.55rem;
+  }
+
+  .rail__nav {
+    margin-left: 0;
+    gap: 0.9rem;
+    justify-content: space-between;
+  }
+
+  /* Thumb targets, not text: the padding is what makes these tappable. This
+     lands them at 44px, the size a thumb actually needs. */
+  .rail__nav a {
+    padding: 0.72rem 0.35rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+
+  .tier--projects {
+    grid-template-columns: 1fr;
+  }
+
+  /* The life tier holds two across on a phone. Six full-width panels made the
+     personal half taller than the professional case it is meant to sit under. */
+  .tier--life {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tier--life .panel__strip {
+    padding: 0.45rem 0.55rem;
+  }
+
+  .tier--life .panel__strip h3 {
+    font-size: 0.92rem;
+  }
+
+  /* The stacked rail is taller on a phone, so the jump target clears more. */
+  .tier {
+    scroll-margin-top: calc(6rem + var(--gutter));
+  }
+
+  /* The panel grows to hold the lede caption; the picture keeps the aspect.
+     Clipping the caption here would delete the page's strongest claim for
+     every phone visitor. */
+  .panel--hero {
+    aspect-ratio: auto;
+  }
+
+  /* The portrait crop has to keep him and the laptop he is looking at in the
+     same frame, or he reads as staring at nothing. He sits left of centre and
+     the laptop sits just right of it, so the crop sits a little right of the
+     art's left edge and the window follows. */
+  .panel--hero .panel__img {
+    aspect-ratio: 4 / 5;
+    height: auto;
+    object-position: 34% 58%;
+  }
+
+  .caption--in {
+    max-width: 88%;
+  }
+
+  .caption--lede {
+    position: static;
+    max-width: none;
+    margin: var(--gutter);
+  }
+
+  /* He stands right of centre in the closing art, so a taller crop keeps him
+     and the skyline he is looking at without the caption landing on him. */
+  .panel--close .panel__img {
+    aspect-ratio: 5 / 4;
+    object-position: 62% 60%;
+  }
+
+  .caption--close {
+    max-width: 52%;
+  }
+
+  .contact__lead {
+    flex-basis: 100%;
+  }
+
+  .contact .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

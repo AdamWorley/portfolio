@@ -1,0 +1,13 @@
+{
+  "name": "Adam Worley",
+  "short_name": "Adam",
+  "description": "Portfolio for Adam Worley",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#6fc0f2",
+  "theme_color": "#f5ce3e",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
